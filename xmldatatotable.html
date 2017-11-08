@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+     <script>
+     
+       function getDetails()
+       {
+          parser=new DOMParser();
+          if (window.XMLHttpRequest)
+          {
+            xmlhttp=new XMLHttpRequest();
+          }
+          xmlhttp.open("GET","books.xml",false);
+          xmlhttp.send();
+          xmlDoc = xmlhttp.responseXML;
+		      table = "<tr><th>Book Title</th><th>Author Name</th><th>Book Publication Date</th><th>Cost</th><th>Publisher Name</th><th>Street Name</th><th>City</th><th>Zip Code</th><th>Country</th></tr>";
+          var x=xmlDoc.getElementsByTagName("book");
+          for (i=0;i<x.length;i++)
+          {
+		      table += "<tr><td>" + 
+        		    x[i].getElementsByTagName("booktitle")[0].childNodes[0].nodeValue +"</td><td>" +	
+                x[i].getElementsByTagName("authorname")[0].childNodes[0].nodeValue +"</td><td>" +
+                x[i].getElementsByTagName("bookpublicationdate")[0].childNodes[0].nodeValue +"</td><td>" +
+                x[i].getElementsByTagName("cost")[0].childNodes[0].nodeValue +"</td><td>" +
+                x[i].getElementsByTagName("publishername")[0].childNodes[0].nodeValue +"</td><td>" +
+                x[i].getElementsByTagName("streetname")[0].childNodes[0].nodeValue +"</td><td>" +
+                x[i].getElementsByTagName("city")[0].childNodes[0].nodeValue +"</td><td>" +
+                x[i].getElementsByTagName("zipcode")[0].childNodes[0].nodeValue +"</td><td>" +
+                x[i].getElementsByTagName("country")[0].childNodes[0].nodeValue +
+        		    "</td></tr>";
+          }
+          document.getElementById("tblData").innerHTML = table;
+        }
+       
+     </script>
+  </head>
+  
+  <body>
+	  <table id="tblData" border="1" style="border-collapse: collapse"> 
+	  </table>
+  </br>
+     <button type="button" onclick="getDetails()">Get Books Details</button>
+   </body>
+</html>

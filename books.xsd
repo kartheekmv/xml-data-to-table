@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema	xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="root">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="book" maxOccurs="unbounded">
+					<xsd:complexType>
+						<xsd:all>
+							<xsd:element name="booktitle">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:pattern value= "[A-Z].*"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+
+							<xsd:element name="authorname" minOccurs="1">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:pattern value= "[A-Z].*"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="bookpublicationdate" type="xsd:date"/>
+							<xsd:element name="cost">
+								<xsd:complexType>
+									<xsd:simpleContent>
+										<xsd:extension base="xsd:decimal">
+											<xsd:attribute name="currency">
+												<xsd:simpleType>
+													<xsd:restriction base="xsd:string">
+														<xsd:enumeration value="dollars" />
+													</xsd:restriction>
+												</xsd:simpleType>
+											</xsd:attribute>
+										</xsd:extension>
+									</xsd:simpleContent>
+								</xsd:complexType>	  
+							</xsd:element>
+							<xsd:element ref="publisher"/>
+						</xsd:all>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="publisher">
+		<xsd:complexType>
+			<xsd:all>
+				
+				<xsd:element name="publishername">
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:pattern value= "[A-Z][a-zA-Z]*( [A-Z][a-zA-Z]*)*"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="publisheraddress">
+					<xsd:complexType>
+						<xsd:sequence>
+
+							<xsd:element name="streetname">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:pattern value= "\d+\s[A-Z].*"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="city">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:pattern value="[A-Z].*"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="zipcode">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:integer">
+										<xsd:minInclusive value="11111"/>
+										<xsd:maxInclusive value="99999"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+
+							<xsd:element name="country">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:pattern value="[A-Z]*"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:all>
+		</xsd:complexType>
+	</xsd:element>
+
+</xsd:schema>
+
